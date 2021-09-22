@@ -6,16 +6,24 @@ import {
   Param,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
+import { Tuit } from './tuit.entity';
+import { TuitsService } from './tuits.service';
 
 @Controller('tuits')
 export class TuitsController {
+  constructor(private readonly tuitService: TuitsService) {}
+
   @Get()
-  getTuits(@Query() filterQuery): string {
-    const { searchTerm, orderBy } = filterQuery;
-    return `All ${searchTerm} tuits ordered by ${orderBy}`;
+  getTuits(): Tuit[] {
+    return this.tuitService.getTuits();
   }
+
+  /*@Get()
+  getTuits(@Query() filterQuery): Tuit[] {
+    const { searchTerm, orderBy } = filterQuery;
+    return this.tuitService.getTuits();
+  }*/
 
   @Get(':id')
   getTuit(@Param('id') id: string): string {
