@@ -26,22 +26,22 @@ export class TuitsController {
   }*/
 
   @Get(':id')
-  getTuit(@Param('id') id: string): string {
-    return `Your tuit id is ${id}`;
+  getTuit(@Param('id') id: string): Tuit {
+    return this.tuitService.getTuit(id);
   }
 
   @Post()
-  createTuit(@Body('message') message: string): string {
-    return `Your tuit was ${message}`;
+  createTuit(@Body('message') message: string): void {
+    return this.tuitService.createTuit(message);
   }
 
   @Patch(':id')
-  updateTuit(@Param('id') id: string, @Body() tuit): string {
-    return `The tuit ${id} has been updated`;
+  updateTuit(@Param('id') id: string, @Body('message') tuit): Tuit {
+    return this.tuitService.updateTuit(id, tuit);
   }
 
   @Delete(':id')
-  deleteTuit(@Param('id') id: string): string {
-    return `The tuit ${id} has been delete`;
+  removeTuit(@Param('id') id: string): void {
+    return this.tuitService.removeTuit(id);
   }
 }
